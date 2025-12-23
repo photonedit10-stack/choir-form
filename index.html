@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 所望詩班-事奉申請表 🎵</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 全域樣式設定 */
+        body { 
+            font-family: 'Noto Sans TC', '微軟正黑體', Arial, sans-serif; 
+            padding: 15px; 
+            background-color: #f0f4f8; 
+            color: #333;
+        }
+        .container { 
+            max-width: 900px; 
+            margin: auto; 
+            background: #ffffff; 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+        }
+
+        /* 標題樣式 */
+        h1 { text-align: center; color: #3f51b5; font-weight: 700; margin-bottom: 5px; font-size: 1.5rem; }
+        h2 { color: #673ab7; border-left: 5px solid #673ab7; padding-left: 15px; margin-top: 25px; font-weight: 500; font-size: 1.2rem; }
+
+        /* 表單區塊與輸入框 */
+        .form-section { padding: 15px 0; border-bottom: 1px dashed #ddd; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #555; }
+        input[type="text"], input[type="email"], input[type="tel"] { 
+            width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; 
+        }
+
+        /* 選項群組樣式 */
+        .checkbox-group, .radio-group { padding: 10px 0; }
+        .checkbox-group label, .radio-group label { display: inline-block; margin-right: 20px; font-weight: normal; cursor: pointer; margin-bottom: 10px; }
+        
+        /* 經文區塊樣式：移除左側藍色直槓 */
+        blockquote {
+            margin: 15px 0 20px;
+            padding: 15px 20px;
+            background-color: #f5f5f5; 
+            font-style: italic;
+            border-radius: 8px;
+            border-left: none; /* 移除藍色槓槓 */
+        }
+
+        /* 承諾自白區塊樣式 */
+        .commitment-section {
+            background-color: #e8f5e9; 
+            border: 1px solid #a5d6a7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        /* 修正自動編號：使用 CSS 計數器 */
+        .commitment-section ol { list-style-type: none; padding-left: 0; counter-reset: item; }
+        .commitment-section ol li { margin-bottom: 12px; padding-left: 1.5em; text-indent: -1.5em; line-height: 1.6; }
+        .commitment-section ol li:before { content: counter(item) ". "; counter-increment: item; font-weight: bold; color: #388e3c; }
+
+        /* 手機簽名欄位優化：寬度設為 100% */
+        .signature-area {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed #bbb;
+            text-align: left;
+        }
+        .signature-area label { color: #c62828; font-weight: bold; }
+        .signature-area input {
+            width: 100%;
+            display: block; 
+            margin-top: 10px;
+            border: 2px solid #3f51b5; 
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1.2rem;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        /* 按鈕與提交訊息 */
+        .button-group { text-align: center; margin-top: 30px; }
+        .submit-btn { 
+            background-color: #009688; color: white; padding: 15px 40px; border: none; border-radius: 50px; 
+            cursor: pointer; font-size: 1.1rem; font-weight: 500; width: 100%; max-width: 300px;
+        }
+        #form-message { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; text-align: center; }
+        .success { background-color: #e8f5e9; color: #388e3c; border: 1px solid #a5d6a7; }
+        .error { background-color: #ffebee; color: #d32f2f; border: 1px solid #ef9a9a; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎵 所望詩班-事奉申請表</h1>
+    <p style="text-align: center; font-size: 0.9rem; color: #666;">填寫資料後點擊提交即可完成申請</p>
+
+    <form id="choir-application-form">
+        <h2>一、 個人基本資料</h2>
+        <div class="form-section">
+            <label for="name">姓名 <span style="color:red">*</span></label>
+            <input type="text" id="name" name="姓名" required>
+            <div class="radio-group">
+                <label>性別 <span style="color:red">*</span></label>
+                <input type="radio" name="性別" value="男" id="gender_m" required><label for="gender_m"> 男</label>
+                <input type="radio" name="性別" value="女" id="gender_f"><label for="gender_f"> 女</label>
+            </div>
+            <label for="applicationDate">申請日期</label>
+            <input type="text" id="applicationDate" name="申請日期" readonly>
+        </div>
+
+        <h2>二、 事奉意願與分組</h2>
+        <div class="form-section checkbox-group">
+            <label>請選擇聲部或職責 (可複選) <span style="color:red">*</span></label>
+            <p style="font-size: 0.85rem; color: #888;">聲部：<br>
+                <label><input type="checkbox" name="聲部_職責" value="第一部 (女高音)" required> 第一部 (女高音)</label>
+                <label><input type="checkbox" name="聲部_職責" value="第二部 (女低音)"> 第二部 (女低音)</label>
+                <label><input type="checkbox" name="聲部_職責" value="第三部 (男高音)"> 第三部 (男高音)</label>
+                <label><input type="checkbox" name="聲部_職責" value="第四部 (男低音)"> 第四部 (男低音)</label>
+            </p>
+            <p style="font-size: 0.85rem; color: #888;">行政/技術：<br>
+                <label><input type="checkbox" name="聲部_職責" value="指揮"> 指揮</label>
+                <label><input type="checkbox" name="聲部_職責" value="司琴"> 司琴</label>
+                <label><input type="checkbox" name="聲部_職責" value="資料組"> 資料組</label>
+                <label><input type="checkbox" name="聲部_職責" value="總務組"> 總務組</label>
+            </p>
+        </div>
+
+        <h2>三、 💡 聖潔與事奉條件自白</h2>
+        <blockquote>
+            <p style="margin: 0; font-size: 1rem; color: #333;">「人若自潔，脫離卑賤的事，就必作貴重的器皿，成為聖潔，合乎主用，預備行各樣的善事。」</p>
+            <p style="margin: 5px 0 0; text-align: right; font-size: 0.85rem; color: #666;">— 提摩太後書 2:21</p>
+        </blockquote>
+        
+        <div class="commitment-section">
+            <p style="color: #c62828; margin-bottom: 15px; font-weight: bold;">【鄭重承諾】申請人簽名視同對以下所有聖工條件，願意在聖樂事奉中遵守。</p>
+            <ol>
+                <li>我已受洗歸主，確信為本會信徒。</li>
+                <li>我願在主內保守聖潔生活，使我合乎主用，得神同工。</li>
+                <li>我參與詩班是為歌頌神，而非表現自己。</li>
+                <li>我能守時守規，配合詩班的練唱及事奉時間。</li>
+                <li>我的服裝儀容能配合教會要求，以大方、整齊、樸素為原則。</li>
+            </ol>
+            <div class="signature-area">
+                <label>申請人全名簽署 <span style="color:red">*</span></label>
+                <input type="text" name="申請人簽名" placeholder="請在此輸入全名" required>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="submit-btn" id="submit-button">提交聖樂事奉申請</button>
+        </div>
+        <div id="form-message"></div>
+    </form>
+</div>
+
+<script>
+    // 自動填入今日日期
+    document.getElementById('applicationDate').value = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+
+    // !!! 請務必替換為您部署後獲得的 Google Web App 網址 !!!
+    const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL'; 
+
+    const form = document.getElementById('choir-application-form');
+    const formMessage = document.getElementById('form-message');
+    const submitButton = document.getElementById('submit-button');
+
+    // 處理複選框：確保至少勾選一個聲部或職責
+    const checkboxes = form.querySelectorAll('input[name="聲部_職責"]');
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            const checked = Array.from(checkboxes).some(c => c.checked);
+            checkboxes[0].required = !checked;
+        });
+    });
+
+    // 提交表單至 Google Sheets
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitButton.disabled = true;
+        submitButton.textContent = '資料傳輸中...';
+        formMessage.style.display = 'none';
+
+        const formData = new FormData(form);
+        const data = {};
+        for (let [key, value] of formData.entries()) {
+            if (key === '聲部_職責') {
+                if (!data[key]) data[key] = [];
+                data[key].push(value);
+            } else {
+                data[key] = value;
+            }
+        }
+        if (data['聲部_職責']) data['聲部_職責'] = data['聲部_職責'].join(', ');
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', 
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            formMessage.className = 'success';
+            formMessage.textContent = '✅ 申請已成功提交！願神祝福您的服事。';
+            formMessage.style.display = 'block';
+            form.reset();
+            submitButton.textContent = '提交完成';
+        })
+        .catch(error => {
+            formMessage.className = 'error';
+            formMessage.textContent = '❌ 提交失敗，請檢查網路後再試。';
+            formMessage.style.display = 'block';
+            submitButton.disabled = false;
+            submitButton.textContent = '重新提交';
+        });
+    });
+</script>
+</body>
+</html>
